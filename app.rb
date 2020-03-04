@@ -41,7 +41,7 @@ get "/items/:id" do
 end
 
 get "/items/:id/customer_input/new" do
-    puts "params: #{params}"
+   # puts "params: #{params}"
 
     
     view "customer_input"
