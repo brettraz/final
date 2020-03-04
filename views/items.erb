@@ -1,0 +1,7 @@
+<h1>All Items</h1>
+
+<% for item in @items %>
+    <p><a href="/items/<%= item[:id] %>"><%= item[:item_name] %></a></p>
+    <p><%= item[:description] %></p>
+<% end %>
+
