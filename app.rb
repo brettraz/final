@@ -44,5 +44,5 @@ get "/items/:id/customer_input/new" do
     puts "params: #{params}"
 
     
-    view "new_customer_input"
+    view "customer_input"
 end
