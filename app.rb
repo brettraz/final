@@ -42,6 +42,7 @@ end
 
 get "/items/:id/customer_input/new" do
    # puts "params: #{params}"
+   @item = items_table.where(id: params[:id]).first
 
     
     view "customer_input"
