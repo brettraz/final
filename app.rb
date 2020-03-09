@@ -12,6 +12,15 @@ use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'     
 before { puts; puts "--------------- NEW REQUEST ---------------"; puts }             #
 after { puts; }                                                                       #
 #######################################################################################
+account_sid = "ACe4e86b17fd74ceb60d19767deea9e698"
+auth_token = "d7999a65daa8f84fd93edc229a329d0a"
+client = Twilio::REST::Client.new(account_sid, auth_token)
+client.messages.create(
+    from: "+16467985251",
+    to: "16306740319",
+    body: "Hey KIEI 451!"
+    )
+
 
 items_table = DB.from(:items)
 customer_input_table = DB.from(:customer_input)
@@ -46,4 +55,23 @@ get "/items/:id/customer_input/new" do
 
     
     view "customer_input"
+end
+
+get "/items/:id/customer_input/create" do
+    puts params
+    @item = items_table.where(id: params[:id]).to_a[0]
+    customer_input_table.insert(item_id: params["id"],
+                                customer_name: params["name"],
+                                customer_phone_number: params["phone number"],
+                                customer_e_mail: params["e-mail"],
+                                desired_pick_up_times: params["desired pick-up time_comments"])
+
+    view "create_customer_input"
+end
+
+get "/purchases" do
+    @item = items_table.where(id: params[:id]).to_a[0]
+    @customer= customer_input_table.where(item_id: @item[:id])
+
+    view "/purchases"
 end

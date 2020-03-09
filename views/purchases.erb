@@ -1,0 +1,21 @@
+<% for item in @item %>
+            <div class="media">
+                    <% =item[:item_id] %>
+                    <% =item[:item_name] %>
+                    <% =item[:price] %>
+
+                </div>
+            </div>
+        <% end %>
+
+<% for customer in @customer %>
+            <div class="media">
+                    <%= customer[:customer_name] %>
+                    <%= customer[:customer_phone_number] %>
+                    <%= customer[:customer_e_mail] %>
+                    <%= customer[:desired_pick_up_times] %>
+                    <%= customer[:item_id} %>]
+
+                </div>
+            </div>
+        <% end %>

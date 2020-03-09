@@ -9,23 +9,25 @@
 
 
 
-<form>
+<form action="/items/<%= @item[:id] %>/customer_input/create">
   
   
   <div class="form-group">
-    <label>Your name</label>
-    <input type="text" class="form-control">
+    <label>name</label>
+    <input type="text" class="form-control" name="customer_name">
   </div>
    <div class="form-group">
-    <label>Phone Number</label>
-    <input type="text" class="form-control">
+    <label>phone number</label>
+    <input type="text" class="form-control" name="customer_phone_number">
   </div>
   <div class="form-group">
-    <label>Email address</label>
-    <input type="email" class="form-control" placeholder="name@example.com">
+    <label>e-mail</label>
+    <input type="email" class="form-control" placeholder="name@example.com" name="customer_e_mail">
   </div>
   <div class="form-group">
-    <label>Desired Pick-up times/comments</label>
-    <textarea class="form-control" rows="3"></textarea>
+    <label>desired pick-up time_comments</label>
+    <textarea class="form-control" rows="3" name="desired_pick_up_times"></textarea>
+    
   </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
