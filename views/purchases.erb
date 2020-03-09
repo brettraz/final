@@ -1,21 +1,24 @@
-<% for item in @item %>
-            <div class="media">
-                    <% =item[:item_id] %>
-                    <% =item[:item_name] %>
-                    <% =item[:price] %>
+<!-- commented out ruby: -->
+<%# for item in @item %>
+            <!-- <div class="media"> -->
+                    <%# =item[:item_id] %>
+                    <%# =item[:item_name] %>
+                    <%# =item[:price] %>
 
-                </div>
-            </div>
-        <% end %>
+                <!-- </div> -->
+            <!-- </div> -->
+        <%# end %>
 
 <% for customer in @customer %>
             <div class="media">
-                    <%= customer[:customer_name] %>
-                    <%= customer[:customer_phone_number] %>
-                    <%= customer[:customer_e_mail] %>
-                    <%= customer[:desired_pick_up_times] %>
-                    <%= customer[:item_id} %>]
-
+                   <ul> Name: <%= customer[:customer_name] %> </ul>
+                   <ul> Phone Number: <%= customer[:customer_phone_number] %> </ul>
+                    <ul> E-mail: <%= customer[:customer_e_mail] %> </ul>
+                    <ul> Pick/up Time: <%= customer[:desired_pick_up_times] %> </ul>
+                    <ul> Customer ID: <%= customer[:item_id] %> </ul>
+                    <ul> Item Name: <%= @items_table.where(id: customer[:item_id]).to_a[0][:item_name] %> </ul>
+                    <ul> Item Price: <%= @items_table.where(id: customer[:item_id]).to_a[0][:price] %> </ul>
+                    <ul> Item ID: <%= @items_table.where(id: customer[:item_id]).to_a[0][:id] %> </ul>
                 </div>
             </div>
         <% end %>

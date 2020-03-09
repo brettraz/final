@@ -61,17 +61,19 @@ get "/items/:id/customer_input/create" do
     puts params
     @item = items_table.where(id: params[:id]).to_a[0]
     customer_input_table.insert(item_id: params["id"],
-                                customer_name: params["name"],
-                                customer_phone_number: params["phone number"],
-                                customer_e_mail: params["e-mail"],
-                                desired_pick_up_times: params["desired pick-up time_comments"])
+                                customer_name: params["customer_name"],
+                                customer_phone_number: params["customer_phone_number"],
+                                customer_e_mail: params["customer_e_mail"],
+                                desired_pick_up_times: params["desired_pick_up_times"])
 
     view "create_customer_input"
 end
 
 get "/purchases" do
-    @item = items_table.where(id: params[:id]).to_a[0]
-    @customer= customer_input_table.where(item_id: @item[:id])
-
+    # @item = items_table.where(id: params[:id]).to_a[0]
+    # @customer= customer_input_table.where(item_id: @item[:id])
+    @customer= customer_input_table.all
+    @items_table = items_table
+    
     view "/purchases"
 end
