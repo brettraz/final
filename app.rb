@@ -13,7 +13,7 @@ before { puts; puts "--------------- NEW REQUEST ---------------"; puts }       
 after { puts; }                                                                       #
 #######################################################################################
 account_sid = "ACe4e86b17fd74ceb60d19767deea9e698"
-auth_token = "d7999a65daa8f84fd93edc229a329d0a"
+auth_token = "67c89d5b64f0edc75097f57499fdd8c8"
 client = Twilio::REST::Client.new(account_sid, auth_token)
 client.messages.create(
     from: "+16467985251",
