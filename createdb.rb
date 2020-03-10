@@ -27,6 +27,13 @@ DB.create_table! :customer_input do
   String :customer_e_mail
   String :desired_pick_up_times, text: true
 end
+
+DB.create_table! :users do
+  primary_key :id
+  String :name
+  String :email
+  String :password
+end
 # Insert initial (seed) data
 items_table = DB.from(:items)
 
