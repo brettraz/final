@@ -24,7 +24,7 @@ client.messages.create(
 
 items_table = DB.from(:items)
 customer_input_table = DB.from(:customer_input)
-users_table = DB.from(:users
+users_table = DB.from(:users)
 
 get "/" do
 
