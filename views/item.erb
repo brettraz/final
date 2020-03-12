@@ -26,8 +26,18 @@
 
                 <p> Price: <%= @item[:price] %></p>
 
+                <p> Pick up location: <%= @item[:location] %></p>
+
                 <p> Available for Sale? <%= @item[:status_available] %></p>
 
+                 <p class="mt-5">
+                <% if @current_user %>
+                <a href="/items/<%= @item[:id] %>customer_input/create" class="btn btn-primary">BUY NOW
+                <% else %>
+                <a href="/logins/new" class="btn btn-danger">Please sign in to purchase</a>
+                <% end %>
+                </p>
+                
                 <h3>Do You Want to Purchase?</h3>
 
                 <a class="btn btn-primary btn-lg" href="/items/<%= @item[:id] %>/customer_input/new" role="button">Buy Now</a>

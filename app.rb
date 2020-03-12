@@ -12,19 +12,23 @@ use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'     
 before { puts; puts "--------------- NEW REQUEST ---------------"; puts }             #
 after { puts; }                                                                       #
 #######################################################################################
-account_sid = "ACe4e86b17fd74ceb60d19767deea9e698"
-auth_token = "67c89d5b64f0edc75097f57499fdd8c8"
-client = Twilio::REST::Client.new(account_sid, auth_token)
-client.messages.create(
-    from: "+16467985251",
-    to: "16306740319",
-    body: "Hey KIEI 451!"
-    )
+# account_sid = "ACe4e86b17fd74ceb60d19767deea9e698"
+# auth_token = "67c89d5b64f0edc75097f57499fdd8c8"
+# client = Twilio::REST::Client.new(account_sid, auth_token)
+# client.messages.create(
+#     from: "+16467985251",
+#     to: "16306740319",
+#     body: "Hey KIEI 451!"
+#     )
 
 
 items_table = DB.from(:items)
 customer_input_table = DB.from(:customer_input)
 users_table = DB.from(:users)
+
+before do
+    @current_user = users_table.where(id: session["user_id"]).to_a[0]
+end
 
 get "/" do
 
@@ -37,12 +41,13 @@ get "/items" do
     puts "params: #{params}"
 
     puts items_table.all
-    @items = items_table.all
+    @items = items_table.all.to_a
     view "items"
 end
 
 get "/items/:id" do
     @item = items_table.where(id: params[:id]).first
+    @users_table = users_table
     view "item"
 
     # pp items_table.where(id: params[:id]).to_a[0]
@@ -86,7 +91,7 @@ end
 post "/users/create" do
     puts params
     hashed_password = BCrypt::Password.create(params["password"])
-    users_table.insert(name: params["name"], email: params["email"], password: hashed_password)
+    users_table.insert(customer_name: params["customer_name"], customer_e_mail: params["customer_e_mail"], password: hashed_password)
     view "create_user"
 end
 
@@ -95,7 +100,7 @@ get "/logins/new" do
 end
 
 post "/logins/create" do
-    user = users_table.where(email: params["email"]).to_a[0]
+    user = users_table.where(email: params["customer_e_mail"]).to_a[0]
     puts BCrypt::Password::new(user[:password])
     if user && BCrypt::Password::new(user[:password]) == params["password"]
         session["user_id"] = user[:id]
