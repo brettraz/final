@@ -43,6 +43,15 @@ get "/items" do
     puts items_table.all
     @items = items_table.all.to_a
     view "items"
+end 
+
+get "/places" do
+    puts "params: #{params}"
+
+    puts places_table.all
+    @places = places_table.all.to_a
+    @items = items_table.all.to_a
+    view "places"
 end
 
 get "/items/:id" do

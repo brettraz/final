@@ -22,6 +22,7 @@ DB.create_table! :places do
 primary_key :id
 String :location
 
+end
 
   
  
