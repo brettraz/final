@@ -32,7 +32,7 @@
 
                  <p class="mt-5">
                 <% if @current_user %>
-                <a href="/items/<%= @item[:id] %>customer_input/create" class="btn btn-primary">BUY NOW
+                <a href="/items/<%= @item[:id] %>/customer_input/new" class="btn btn-primary">BUY NOW
                 <% else %>
                 <a href="/logins/new" class="btn btn-danger">Please sign in to purchase</a>
                 <% end %>

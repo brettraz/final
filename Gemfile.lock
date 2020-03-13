@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.17.0)
+    bcrypt (3.1.13)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     jwt (2.2.1)
@@ -41,6 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   pg
   sequel
   sinatra

@@ -33,6 +33,7 @@ DB.create_table! :customer_input do
   foreign_key :customer_name
   foreign_key :customer_phone_number
   foregin_key :customer_e_mail
+  foreign_key :user_id
   String :desired_pick_up_times, text: true
 end
 

@@ -3,7 +3,8 @@ require "sinatra"                                                               
 require "sinatra/reloader" if development?                                            #
 require "sequel"                                                                      #
 require "logger"                                                                      #
-require "twilio-ruby"                                                                 #
+require "twilio-ruby"  
+require "bcrypt"                                                               #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
 DB.loggers << Logger.new($stdout) unless DB.loggers.size > 0                          #
@@ -25,6 +26,7 @@ after { puts; }                                                                 
 items_table = DB.from(:items)
 customer_input_table = DB.from(:customer_input)
 users_table = DB.from(:users)
+places_table= DB.from(:places)
 
 before do
     @current_user = users_table.where(id: session["user_id"]).to_a[0]
@@ -100,7 +102,7 @@ end
 post "/users/create" do
     puts params
     hashed_password = BCrypt::Password.create(params["password"])
-    users_table.insert(customer_name: params["customer_name"], customer_e_mail: params["customer_e_mail"], password: hashed_password)
+    users_table.insert(customer_name: params["customer_name"], customer_email: params["customer_e_mail"], password: hashed_password)
     view "create_user"
 end
 
@@ -109,8 +111,8 @@ get "/logins/new" do
 end
 
 post "/logins/create" do
-    user = users_table.where(email: params["customer_e_mail"]).to_a[0]
-    puts BCrypt::Password::new(user[:password])
+    user = users_table.where(customer_email: params["customer_e_mail"]).to_a[0]
+    # puts BCrypt::Password::new(user[:password])
     if user && BCrypt::Password::new(user[:password]) == params["password"]
         session["user_id"] = user[:id]
         @current_user = user

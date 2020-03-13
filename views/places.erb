@@ -1,27 +1,27 @@
 <h1>All Items by Location</h1>
 
-<h2> <%= @places[:id][1][location] %> </h2>
+<h2> <%= @places[0][:location] %> </h2>
 
 
-<% for item in @items[:places_id][1] %>
+<% for item in @items %>
     <p><a href="/items/<%= item[:id] %>"><%= item[:item_name] %></a></p>
     <p><%= item[:description] %></p>
 <% end %>
 
 
-<h2> <%= @places[:id][2][:location] %> </h2>
+<h2> <%= @places[1][:location] %> </h2>
 
 
-<% for item in @items[:places_id][2] %>
+<% for item in @items%>
     <p><a href="/items/<%= item[:id] %>"><%= item[:item_name] %></a></p>
     <p><%= item[:description] %></p>
 <% end %>
 
 
-<h2> <%= @places[:id][3][:location] %> </h2>
+<h2> <%= @places[2][:location] %> </h2>
 
 
-<% for item in @items[:places_id][3] %>
+<% for item in @items %>
     <p><a href="/items/<%= item[:id] %>"><%= item[:item_name] %></a></p>
     <p><%= item[:description] %></p>
 <% end %>
