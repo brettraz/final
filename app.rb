@@ -13,14 +13,7 @@ use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'     
 before { puts; puts "--------------- NEW REQUEST ---------------"; puts }             #
 after { puts; }                                                                       #
 #######################################################################################
-# account_sid = "ACe4e86b17fd74ceb60d19767deea9e698"
-# auth_token = "67c89d5b64f0edc75097f57499fdd8c8"
-# client = Twilio::REST::Client.new(account_sid, auth_token)
-# client.messages.create(
-#     from: "+16467985251",
-#     to: "16306740319",
-#     body: "Thank you for your purchase"
-#     )
+
 
 
 items_table = DB.from(:items)
@@ -83,7 +76,6 @@ get "/items/:id/customer_input/create" do
                                 customer_e_mail: params["customer_e_mail"],
                                 desired_pick_up_times: params["desired_pick_up_times"])
 
-    view "create_purchases"
     account_sid = "thanks"
     auth_token = "ben"
     client = Twilio::REST::Client.new(account_sid, auth_token)
@@ -92,7 +84,14 @@ get "/items/:id/customer_input/create" do
     to: @current_user[:customer_phone_number],
     body: "Thank you for your purchase"
     )
+    
+    
+    view "create_customer_input"
+    
 end
+
+
+
 
 get "/purchases" do
     # @item = items_table.where(id: params[:id]).to_a[0]
