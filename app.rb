@@ -67,7 +67,7 @@ get "/items/:id/customer_input/new" do
     view "customer_input"
 end
 
-get "/items/:id/customer_input/create" do
+post "/items/:id/customer_input/create" do
     puts params
     @item = items_table.where(id: params[:id]).to_a[0]
     customer_input_table.insert(items_id: params["id"],
@@ -76,8 +76,9 @@ get "/items/:id/customer_input/create" do
                                 customer_e_mail: params["customer_e_mail"],
                                 desired_pick_up_times: params["desired_pick_up_times"])
 
-    account_sid = "thanks"
-    auth_token = "ben"
+    account_sid = ENV["thanks"]
+    auth_token = ENV["ben"]
+    puts @current_user.to_s
     client = Twilio::REST::Client.new(account_sid, auth_token)
     client.messages.create(
     from: "+16467985251",
@@ -109,7 +110,7 @@ end
 post "/users/create" do
     puts params
     hashed_password = BCrypt::Password.create(params["password"])
-    users_table.insert(customer_name: params["customer_name"], customer_email: params["customer_e_mail"], password: hashed_password)
+    users_table.insert(customer_name: params["customer_name"], customer_email: params["customer_e_mail"], customer_phone_number: params["customer_phone_number"], password: hashed_password)
     view "create_user"
 end
 
