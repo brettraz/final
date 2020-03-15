@@ -83,7 +83,7 @@ post "/items/:id/customer_input/create" do
     client.messages.create(
     from: "+16467985251",
     to: @current_user[:customer_phone_number],
-    body: "Thank you for your purchase"
+    body: "Thank you for your purchase and scheduling a pick-up time from Elmhurst Used Goods Emporium"
     )
     
     
@@ -99,6 +99,7 @@ get "/purchases" do
     # @customer= customer_input_table.where(item_id: @item[:id])
     @customer= customer_input_table.all
     @items_table = items_table
+    @users = users_table.all
     
     view "/purchases"
 end
